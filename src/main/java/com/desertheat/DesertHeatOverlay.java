@@ -25,19 +25,32 @@ public class DesertHeatOverlay extends OverlayPanel {
     {
 
         final FontMetrics fontMetrics = graphics.getFontMetrics();
-
         panelComponent.setPreferredSize(new Dimension(100, 0));
 
         panelComponent.getChildren().add(TitleComponent.builder()
-                .text("servings: " + plugin.waterServingsCount)
+                .text("Servings: " + plugin.waterServingsCount)
                 .build());
         panelComponent.getChildren().add(TitleComponent.builder()
-                .text("drain rate: " + plugin.drainRateUpdated)
-                .build());
-        panelComponent.getChildren().add(TitleComponent.builder()
-                .text("Time Left: " + plugin.convertTicksToTime(plugin.waterServingsCount * plugin.drainRateUpdated - plugin.tickCount))
+                .text("Drain Rate: " + plugin.drainRateUpdated)
                 .build());
 
+
+        if (plugin.waterServingsCount<= 0) {
+                panelComponent.getChildren().add(TitleComponent.builder()
+                        .text("Time Left: NO WATER" )
+                        .build());
+        }else {
+                if (plugin.sipTimer > -1){
+                    panelComponent.getChildren().add(TitleComponent.builder()
+                            .text("Time Left: " + plugin.convertTicksToTime(plugin.waterServingsCount * plugin.drainRateUpdated - plugin.tickCount))
+                            .build());
+
+                }else{
+                    panelComponent.getChildren().add(TitleComponent.builder()
+                            .text("Time Left: " + plugin.convertTicksToTime(plugin.waterServingsCount * plugin.drainRateUpdated))
+                            .build());
+                }
+        }
 
 
 
@@ -80,6 +93,7 @@ public class DesertHeatOverlay extends OverlayPanel {
 
         waterBar.setLabelDisplayMode(ProgressBarComponent.LabelDisplayMode.FULL);
         panelComponent.getChildren().add(waterBar);
+        panelComponent.setGap(new Point(1,1));
 
         return super.render(graphics);
     }

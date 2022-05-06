@@ -46,7 +46,7 @@ public class DesertHeatPlugin extends Plugin
 	protected void startUp() throws Exception
 	{
 		log.info("Example started!");
-		overlayManager.add(overlay);
+
 	}
 
 	@Override
@@ -76,6 +76,20 @@ public class DesertHeatPlugin extends Plugin
 			sipTimer = -1;
 
 		}
+
+		// maybe thres faster way to do this kidna slow
+		for (int i = 0; i < ResetAreas.desertArea.length; i++){
+			if(ResetAreas.desertArea[i].contains2D(player.getWorldLocation())){
+				overlayManager.add(overlay);
+				break;
+			}
+			else{
+				overlayManager.remove(overlay);
+			}
+		}
+
+
+
 
 	}
 
@@ -128,6 +142,7 @@ public class DesertHeatPlugin extends Plugin
 			tickCount = 0;
 			waterServingsCount = getNumberOfWaterServings();
 			drainRate = calculateConsumptionTicks();
+			sipTimer = 0;
 		}
 	}
 
@@ -190,7 +205,6 @@ public class DesertHeatPlugin extends Plugin
 		}
 
 		if (EffectedGear.effectedTorsos.contains(items[EquipmentInventorySlot.BODY.getSlotIdx()].getId())){
-			//client.addChatMessage(ChatMessageType.GAMEMESSAGE, "","effect torso: on", null);
 			baseDrainRate = baseDrainRate - 40;
 		}
 
@@ -229,6 +243,17 @@ public class DesertHeatPlugin extends Plugin
 		int p2 = seconds / 60;
 		int p3 = p2 % 60;
 		p2 = p2 / 60;
+
+		if (p2 <= 0){
+			if (p1 < 10){
+				return ( p3 + ":0" + p1);
+			}
+			return ( p3 + ":" + p1);
+		}
+
+		if (p1 < 10){
+			return (  p2 + ":" + p3 + ":0" + p1);
+		}
 		return ( p2 + ":" + p3 + ":" + p1);
 	}
 

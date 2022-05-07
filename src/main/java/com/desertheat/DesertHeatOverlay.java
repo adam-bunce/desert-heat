@@ -47,7 +47,7 @@ public class DesertHeatOverlay extends OverlayPanel {
 
                 }else{
                     panelComponent.getChildren().add(TitleComponent.builder()
-                            .text("Time Left: " + plugin.convertTicksToTime(plugin.waterServingsCount * plugin.drainRateUpdated))
+                            .text("Time Left: ~" + plugin.convertTicksToTime(plugin.waterServingsCount * plugin.drainRateUpdated))
                             .build());
                 }
         }
@@ -61,10 +61,10 @@ public class DesertHeatOverlay extends OverlayPanel {
 
 
         if (plugin.sipTimer> -1) {
-            waterBar.setLabelDisplayMode(ProgressBarComponent.LabelDisplayMode.BOTH);
+           // waterBar.setLabelDisplayMode(ProgressBarComponent.LabelDisplayMode.BOTH);
             waterBar.setMaximum(plugin.drainRate);
             waterBar.setValue(plugin.sipTimer);
-
+            waterBar.setLabelDisplayMode(ProgressBarComponent.LabelDisplayMode.FULL);
 
             if (plugin.waterServingsCount <= 0 ){
                 waterColour = new Color(190, 62, 62, 90);
@@ -72,8 +72,8 @@ public class DesertHeatOverlay extends OverlayPanel {
             }
 
         } else{
-            waterColour = new Color(91, 86, 86, 100);
-            waterFilledColour = new Color(189, 183, 183, 100);
+            waterColour = new Color(33, 27, 22,90);
+            waterFilledColour = new Color(33, 27, 22,90);
             waterBar.setMaximum(0);
             waterBar.setValue(0);
 
@@ -91,7 +91,7 @@ public class DesertHeatOverlay extends OverlayPanel {
         waterBar.setForegroundColor(waterFilledColour);
 
 
-        waterBar.setLabelDisplayMode(ProgressBarComponent.LabelDisplayMode.FULL);
+
         panelComponent.getChildren().add(waterBar);
         panelComponent.setGap(new Point(1,1));
 

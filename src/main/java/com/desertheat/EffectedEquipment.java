@@ -7,11 +7,10 @@ import java.util.Set;
 
 
 /**
- * list of all the items of gear that reduce
- * the time between desert heat ticks ( that I currently know of )
+ * list of all the items of gear that reduce the time between desert heat ticks
+ * ( that I currently know of ), some are hardcoded b/c they dont follow the pattern
  */
-public class EffectedGear {
-
+public class EffectedEquipment {
 
     static final Set<Integer> effectedTorsos = ImmutableSet.of(
             ItemID.DRAGON_CHAINBODY,
@@ -46,14 +45,12 @@ public class EffectedGear {
             ItemID.VERACS_PLATESKIRT_23635
     );
 
-
     static final Set<Integer> effectedBoots = ImmutableSet.of(
             ItemID.DRAGON_BOOTS,
             ItemID.SNAKESKIN_BOOTS,
             ItemID.DRAGON_BOOTS_G,
             ItemID.DRAGONSTONE_BOOTS
     );
-
 
     static final Set<Integer> effectedGloves = ImmutableSet.of(
             ItemID.BLACK_DHIDE_VAMBRACES,
@@ -65,6 +62,31 @@ public class EffectedGear {
             ItemID.MITHRIL_SQ_SHIELD
 
     );
+
+    // Desert top (overcoat) is hardcoded as +6 seconds (not 12)
+    static final Set<Integer> bonusTorsos = ImmutableSet.of(
+            ItemID.DESERT_SHIRT,
+            ItemID.PROSPECTOR_JACKET,
+            ItemID.DESERT_TOP
+    );
+
+    static final Set<Integer> bonusLegs = ImmutableSet.of(
+            ItemID.DESERT_ROBE,
+            ItemID.PROSPECTOR_LEGS,
+            ItemID.DESERT_LEGS,
+            ItemID.DESERT_ROBES
+    );
+
+    static final Set<Integer> bonusBoots = ImmutableSet.of(
+            ItemID.DESERT_BOOTS,
+            ItemID.PROSPECTOR_BOOTS
+    );
+
+    // prospector helm is hard coded as +4 seconds (not 12)
+    static final Set<Integer> bonusHeads = ImmutableSet.of(
+        ItemID.MENAPHITE_PURPLE_HAT
+    );
+
 
 
 }

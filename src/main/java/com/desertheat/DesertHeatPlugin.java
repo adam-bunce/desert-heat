@@ -23,37 +23,28 @@ public class DesertHeatPlugin extends Plugin
 {
 	@Inject
 	private Client client;
-
 	@Inject
 	private DesertHeatConfig config;
-
 	@Inject
 	private DesertHeatOverlay overlay;
-
 	@Inject
 	private OverlayManager overlayManager;
-
 	public int tickCount;
 	public int drainRate, drainRateUpdated;
 	public int sipTimer;
 	public int waterServingsCount;
 
-	public boolean dropFlag = false;
-
-
 	@Override
 	protected void startUp() throws Exception
 	{
-		log.info("Example started!");
-
+		log.info("Desert Heat Plugin Started.");
 	}
 
 	@Override
 	protected void shutDown() throws Exception
 	{
-		log.info("Example stopped!");
+		log.info("Desert Heat Plugin Stopped.");
 	}
-
 
 	@Subscribe
 	public void onGameTick(GameTick gameTick)
@@ -65,14 +56,14 @@ public class DesertHeatPlugin extends Plugin
 		if (player == null){
 			return;
 		}
-		// if the player walks through a a reset area stop the timer (areas would be shantypass, pollinivieach, bandit camp.. etc) areas where desert heat resets
-		if (ResetAreas.ShantyPass.contains2D(player.getWorldLocation())){
-			// tickCount = -1;
-			sipTimer = -1;
 
-		}
+//		// reset drink time prediction if player goes through area with no desert heat effect
+//		if (ResetAreas.ShantyPass.contains2D(player.getWorldLocation())){
+//			// tickCount = -1;
+//			sipTimer = -1;
+//
+//		}
 
-		// maybe thres faster way to do this kidna slow
 		for (int i = 0; i < ResetAreas.desertArea.length; i++){
 			if(ResetAreas.desertArea[i].contains2D(player.getWorldLocation())){
 				overlayManager.add(overlay);
@@ -86,41 +77,31 @@ public class DesertHeatPlugin extends Plugin
 
 	@Subscribe
 	public void onItemContainerChanged(ItemContainerChanged itemContainerChanged){
-		// if water was consumed
-//		if (waterServingsCount > getNumberOfWaterServings() && !dropFlag){
-//
-//			if (config.showOffsetMessages()) {
-//				client.addChatMessage(ChatMessageType.GAMEMESSAGE, "","timer off by: " +(drainRate - tickCount) + " ticks","");
-//			}
-//			tickCount = 0;
-//			sipTimer = calculateConsumptionTicks();
-//			drainRate = calculateConsumptionTicks();
-//
-//		}
-
 		drainRateUpdated = calculateConsumptionTicks();
-
 		waterServingsCount = getNumberOfWaterServings();
 	}
 
-
-	// reset if you take desert damage
+	// timer resets if any of these messages are sent (they're not visible in chat only when printing to terminal)
 	@Subscribe
 	public void onChatMessage(ChatMessage chatMessage)
 	{
-		// these are said but dont appear in chat
-		List resetMessages = Arrays.asList ("You start dying of thirst while you're in the desert.", "You take a drink of water.", "You eat a choc ice.");
+
 		System.out.println(chatMessage.getMessage());
+		List resetMessages = Arrays.asList ("You start dying of thirst while you're in the desert.", "You take a drink of water.", "You eat a choc ice.",
+											"The guard takes your Shantay Pass as you go through the gate.");
 		if (resetMessages.contains(chatMessage.getMessage())){
+
+			if (config.showOffsetMessages()){
+				client.addChatMessage(ChatMessageType.GAMEMESSAGE, "","DESERT HEAT PLUGIN: Timer off by: " + ( sipTimer ) + " ticks","");
+			}
+
 			tickCount = 0;
 			sipTimer = calculateConsumptionTicks();
 			drainRate = calculateConsumptionTicks();
 		}
-
 	}
 
-	// this is equivalent to "on loaded into game" like the game actually starts and ticks start going
-	// reset all important variables
+	// on loaded into game
 	@Subscribe
 	public void onWidgetClosed(WidgetClosed widgetClosed)
 	{
@@ -132,8 +113,7 @@ public class DesertHeatPlugin extends Plugin
 		}
 	}
 
-
-	public int getNumberOfWaterServings(){
+	public int getNumberOfWaterServings() {
 		int count = 0;
 		ItemContainer container = client.getItemContainer(InventoryID.INVENTORY);
 
@@ -141,7 +121,6 @@ public class DesertHeatPlugin extends Plugin
 			return 0;
 		}
 
-		// TODO add chocoice and all the other water items
 		for (Item item: container.getItems()){
 			if (item.getId() == ItemID.WATERSKIN4) {
 				count+= 4;
@@ -153,15 +132,15 @@ public class DesertHeatPlugin extends Plugin
 				count+= 1;
 			} else if (item.getId() == ItemID.WATERSKIN0){
 
+			} else if (item.getId() == ItemID.CHOCICE){
+				count += 1;
 			}
 		}
-
 		return count;
-
 	}
 
 	// this is calculated in ticks not seconds
-	public int calculateConsumptionTicks(){
+	public int calculateConsumptionTicks() {
 
 		int manualOffset = 0;
 		try	{
@@ -256,45 +235,17 @@ public class DesertHeatPlugin extends Plugin
 		return bonus;
 	}
 
-	
-	public int convertTicksToSeconds(int ticks){
-		return (int) (ticks * 0.6);
-
-	}
-
-
 	public String convertTicksToTime(int ticks){
-		int seconds = (int) (ticks * 0.6);
-		int p1 = seconds % 60;
-		int p2 = seconds / 60;
-		int p3 = p2 % 60;
-		p2 = p2 / 60;
+		int totalSecs = (int) (ticks * 0.6);
+		int hours = totalSecs / 3600;
+		int minutes = (totalSecs % 3600) / 60;
+		int seconds = totalSecs % 60;
 
-		String p1Text, p2Text, p3Text;
-		p1Text = p2Text = p3Text = "";
-
-		if (p1 < 10){
-			p1Text = "0" + p1;
-		}else{
-			p1Text = String.valueOf(p1);
+		if (hours <= 0 ){
+			return String.format("%02d:%02d", minutes, seconds);
 		}
 
-		if (p2 <= 0){
-			p2Text = "";
-		} else if (p2 < 10){
-			p2Text = "0:" + p2;
-		}else{
-			p2Text = String.valueOf(p2) + ":";
-		}
-
-		if (p3 < 10){
-			p3Text = "0" + p3;
-		}else{
-			p3Text = String.valueOf(p3);
-		}
-
-
-		return ( p2Text  + p3Text + ":" + p1Text);
+		return String.format("%02d:%02d:%02d", hours, minutes, seconds);
 	}
 
 	@Provides

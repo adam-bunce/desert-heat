@@ -3,13 +3,14 @@ package com.desertheat;
 import net.runelite.api.coords.WorldArea;
 import net.runelite.api.coords.WorldPoint;
 
+// TODO add proper areas
 
 /**
  * These are areas where the desert heat timer gets reset
  */
 public class ResetAreas {
 
-    static final WorldArea ShantyPass = new WorldArea(3294, 3116, 19, 13, 0);
+    // static final WorldArea ShantyPass = new WorldArea(3294, 3116, 19, 13, 0);
     // (3295, 3126, 3311, 3116);
 
     static final WorldArea[] desertArea= {

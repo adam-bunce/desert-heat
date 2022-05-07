@@ -43,6 +43,7 @@ public class DesertHeatPlugin extends Plugin
 	@Override
 	protected void shutDown() throws Exception
 	{
+		overlayManager.remove(overlay);
 		log.info("Desert Heat Plugin Stopped.");
 	}
 

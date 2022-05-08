@@ -19,4 +19,4 @@ If you're having to use the Manual Offset
 config option then some item of gear is missing/has been added incorrectly. 
 To fix this *(or to address any other issues)* create a [Github Issue](https://github.com/adam-bunce/desert-heat/issues) or 
 message me on discord `4dam#3668` with a screenshot of your <b> Equipment Tab </b> and the <b>
-Offset Helper Messages </b>from chat.
+Offset Helper Messages </b>from chat, and I will fix it ASAP.

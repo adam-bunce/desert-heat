@@ -1,5 +1,5 @@
 # Desert Heat ![](icon.png)
-Adds an overlay to help monitor water usage in areas with the [desert heat](https://oldschool.runescape.wiki/w/Desert_heat) effect
+Adds an overlay to help monitor water usage in areas with the [desert heat](https://oldschool.runescape.wiki/w/Desert_heat) effect.
 ######
 ![img.png](READMEimages/img.png)
 ![img_3.png](READMEimages/img_3.png)
@@ -29,6 +29,9 @@ then the manual offset in config options should look like this:
 
 ![](READMEimages/img_6.png)
 
+Effect of having "armour" items in each slot on the desert heat timer in ticks, base time is 150 ticks.
+
+![](READMEimages/effectOfItems.png)
 ## Limitations
 The plugin depends on a list of items to calculate how quickly your water will drain, 
 this list is not 100% accurate. Because of this you should take the calculated times with a grain of salt,

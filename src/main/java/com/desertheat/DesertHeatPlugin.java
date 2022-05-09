@@ -80,7 +80,7 @@ public class DesertHeatPlugin extends Plugin
 	public void onChatMessage(ChatMessage chatMessage)
 	{
 
-		System.out.println(chatMessage.getMessage());
+		// System.out.println(chatMessage.getMessage());
 		List resetMessages = Arrays.asList ("You start dying of thirst while you're in the desert.", "You take a drink of water.", "You eat a choc ice.",
 											"The guard takes your Shantay Pass as you go through the gate.");
 		if (resetMessages.contains(chatMessage.getMessage())){

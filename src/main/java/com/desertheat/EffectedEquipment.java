@@ -2,14 +2,9 @@ package com.desertheat;
 
 import com.google.common.collect.ImmutableSet;
 import net.runelite.api.ItemID;
-
 import java.util.Set;
 
-
-/**
- * list of all the items of gear that reduce the time between desert heat ticks
- * ( that I currently know of ), some are hardcoded b/c they dont follow the pattern
- */
+// All armour items from the wiki (only armour items effect the desert heat interval acc. to the wiki)
 public class EffectedEquipment {
 
     static final Set<Integer> effectedTorsos = ImmutableSet.of(

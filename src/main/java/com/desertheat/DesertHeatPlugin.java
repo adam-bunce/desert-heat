@@ -58,15 +58,8 @@ public class DesertHeatPlugin extends Plugin
 			return;
 		}
 
-//		// reset drink time prediction if player goes through area with no desert heat effect
-//		if (ResetAreas.ShantyPass.contains2D(player.getWorldLocation())){
-//			// tickCount = -1;
-//			sipTimer = -1;
-//
-//		}
-
-		for (int i = 0; i < ResetAreas.desertArea.length; i++){
-			if(ResetAreas.desertArea[i].contains2D(player.getWorldLocation())){
+		for (int i = 0; i < DesertArea.desertArea.length; i++){
+			if(DesertArea.desertArea[i].contains2D(player.getWorldLocation())){
 				overlayManager.add(overlay);
 				break;
 			}

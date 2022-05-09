@@ -11,8 +11,6 @@ public class DesertHeatOverlay extends OverlayPanel {
     private final DesertHeatPlugin plugin;
     private final DesertHeatConfig config;
 
-
-
     @Inject
     public DesertHeatOverlay(DesertHeatPlugin plugin, DesertHeatConfig config)
     {
@@ -27,7 +25,6 @@ public class DesertHeatOverlay extends OverlayPanel {
     @Override
     public Dimension render(Graphics2D graphics)
     {
-
 
         final FontMetrics fontMetrics = graphics.getFontMetrics();
         panelComponent.setPreferredSize(new Dimension(100, 0));
@@ -51,11 +48,12 @@ public class DesertHeatOverlay extends OverlayPanel {
 
         }
 
-        if (plugin.waterServingsCount<= 0) {
+        if (config.showTimeLeft()){
+            if (plugin.waterServingsCount<= 0) {
                 panelComponent.getChildren().add(TitleComponent.builder()
                         .text("Time Left: NO WATER" )
                         .build());
-        }else {
+            }else {
                 if (plugin.sipTimer > -1){
                     panelComponent.getChildren().add(TitleComponent.builder()
                             .text("Time Left: " + plugin.convertTicksToTime(plugin.waterServingsCount * plugin.drainRateUpdated - plugin.tickCount))
@@ -66,52 +64,56 @@ public class DesertHeatOverlay extends OverlayPanel {
                             .text("Time Left: ~" + plugin.convertTicksToTime(plugin.waterServingsCount * plugin.drainRateUpdated))
                             .build());
                 }
+            }
         }
 
-
-        final ProgressBarComponent waterBar = new ProgressBarComponent();
-        Color waterColour = new Color(50, 116, 212, 90);
-        Color waterFilledColour = new Color(50, 55, 212, 90);
+        if (config.showDrainBar()){
 
 
-        if (plugin.sipTimer> -1) {
-           // waterBar.setLabelDisplayMode(ProgressBarComponent.LabelDisplayMode.BOTH);
+            final ProgressBarComponent waterBar = new ProgressBarComponent();
+            Color waterColour = new Color(50, 116, 212, 90);
+            Color waterFilledColour = new Color(50, 55, 212, 90);
 
-            if (config.timeFormat().getTimeFormat().equals("Seconds")){
-                waterBar.setMaximum((long) (plugin.drainRate  * .6));
-                waterBar.setValue(plugin.sipTimer * .6);
-            }else{
-                waterBar.setMaximum(plugin.drainRate);
-                waterBar.setValue(plugin.sipTimer);
-            }
 
-            waterBar.setLabelDisplayMode(ProgressBarComponent.LabelDisplayMode.FULL);
+            if (plugin.sipTimer> -1) {
+                // waterBar.setLabelDisplayMode(ProgressBarComponent.LabelDisplayMode.BOTH);
 
-            if (plugin.waterServingsCount <= 0 ){
-                waterColour = new Color(190, 62, 62, 90);
-                waterFilledColour = new Color(155, 0, 0, 230);
-            }
+                if (config.timeFormat().getTimeFormat().equals("Seconds")){
+                    waterBar.setMaximum((long) (plugin.drainRate  * .6));
+                    waterBar.setValue(plugin.sipTimer * .6);
+                }else{
+                    waterBar.setMaximum(plugin.drainRate);
+                    waterBar.setValue(plugin.sipTimer);
+                }
 
-        } else{
-            waterColour = new Color(33, 27, 22,90);
-            waterFilledColour = new Color(33, 27, 22,90);
-            waterBar.setMaximum(0);
-            waterBar.setValue(0);
-            waterBar.setLabelDisplayMode(ProgressBarComponent.LabelDisplayMode.TEXT_ONLY);
+                waterBar.setLabelDisplayMode(ProgressBarComponent.LabelDisplayMode.FULL);
 
-            if (plugin.waterServingsCount <= 0){
+                if (plugin.waterServingsCount <= 0 ){
+                    waterColour = new Color(190, 62, 62, 90);
+                    waterFilledColour = new Color(155, 0, 0, 230);
+                }
+
+            } else{
+                waterColour = new Color(33, 27, 22,90);
+                waterFilledColour = new Color(33, 27, 22,90);
+                waterBar.setMaximum(0);
+                waterBar.setValue(0);
+                waterBar.setLabelDisplayMode(ProgressBarComponent.LabelDisplayMode.TEXT_ONLY);
+
+                if (plugin.waterServingsCount <= 0){
                     waterBar.setCenterLabel("Waiting For Damage");
-            }else {
-                waterBar.setCenterLabel("Waiting For Sip");
-            }// waterBar.setDimmed(true);
+                }else {
+                    waterBar.setCenterLabel("Waiting For Sip");
+                }
+            }
+
+            waterBar.setBackgroundColor(waterColour);
+            waterBar.setForegroundColor(waterFilledColour);
+
+            panelComponent.getChildren().add(waterBar);
         }
 
-        waterBar.setBackgroundColor(waterColour);
-        waterBar.setForegroundColor(waterFilledColour);
-
-        panelComponent.getChildren().add(waterBar);
         panelComponent.setGap(new Point(1,1));
-
         return super.render(graphics);
     }
 

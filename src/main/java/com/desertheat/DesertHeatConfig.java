@@ -7,12 +7,10 @@ import net.runelite.client.config.ConfigItem;
 @ConfigGroup("example")
 public interface DesertHeatConfig extends Config
 {
-
-
 	@ConfigItem(
 			keyName = "manualOffset",
 			name = "Manual Timer Offset",
-			description = "Offsets when the waterskin consumption timer resets",
+			description = "Offsets when the waterskin consumption timer resets.",
 			position = 0
 	)
 	default String manualOffset(){
@@ -23,7 +21,7 @@ public interface DesertHeatConfig extends Config
 
 			keyName = "showOffsetMessages",
 			name = "Show Offset Helper Messages",
-			description = "Adds messages to chat to help user adjust the manual offset so the countdown timer resets on correct tick",
+			description = "Adds messages to chat to help user accurately adjust the manual offset.",
 			position = 1
 	)
 	default boolean showOffsetMessages()
@@ -34,7 +32,7 @@ public interface DesertHeatConfig extends Config
 	@ConfigItem(
 			keyName = "showWaterServings",
 			name = "Show Water Servings",
-			description = "Toggles Water Servings on the UI",
+			description = "Toggles whether \"Servings: __\" is visible in the overlay.",
 			position = 2
 	)
 	default boolean showWaterServings()
@@ -45,10 +43,33 @@ public interface DesertHeatConfig extends Config
 	@ConfigItem(
 			keyName = "showDrainRate",
 			name = "Show Drain Rate",
-			description = "Toggles Drain Rate on the UI",
+			description = "Toggles whether \"Drain Rate: every __\" is visible in the overlay.",
 			position = 3
 	)
 	default boolean showDrainRate()
+	{
+		return true;
+	}
+
+	@ConfigItem(
+			keyName = "howTimeLeft",
+			name = "Show Time Left",
+			description = "Toggles whether \"Time Left: __\" is visible in the overlay.",
+			position = 4
+	)
+	default boolean showTimeLeft()
+	{
+		return true;
+	}
+
+
+	@ConfigItem(
+			keyName = "showDrainBar",
+			name = "Show Drain Bar",
+			description = "Toggles whether the drain bar is visible in the overlay.",
+			position = 5
+	)
+	default boolean showDrainBar()
 	{
 		return true;
 	}
@@ -57,8 +78,8 @@ public interface DesertHeatConfig extends Config
 	@ConfigItem(
 			keyName = "timeFormat",
 			name = "Time Format",
-			description = "Sets the time format in the UI to either seconds or ticks",
-			position = 4
+			description = "Sets the overlay countdown timers to display in Ticks or Seconds.",
+			position = 6
 
 	)
 	default TimeFormatConfig timeFormat()

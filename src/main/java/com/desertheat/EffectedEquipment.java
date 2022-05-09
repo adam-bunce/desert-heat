@@ -197,12 +197,15 @@ public class EffectedEquipment {
             // third age
 
             ItemID.ARMADYL_CHESTPLATE,
-            ItemID.ARMADYL_CHESTPLATE_OR
+            ItemID.ARMADYL_CHESTPLATE_OR,
 
 
-
-
-
+            // Mage
+            ItemID.SPLITBARK_BODY,
+            ItemID.SWAMPBARK_BODY,
+            ItemID.BLOODBARK_BODY,
+            ItemID.LUNAR_TORSO,
+            ItemID.ANCESTRAL_ROBE_TOP
     );
 
     static final Set<Integer> effectedHeads = ImmutableSet.of(
@@ -382,7 +385,16 @@ public class EffectedEquipment {
             // third age
 
             ItemID.ARMADYL_HELMET,
-            ItemID.ARMADYL_HELMET_OR
+            ItemID.ARMADYL_HELMET_OR,
+
+            // Mage
+            ItemID.SPLITBARK_HELM_20568,
+            ItemID.SPLITBARK_HELM,
+            ItemID.SWAMPBARK_HELM,
+            ItemID.BLOODBARK_HELM,
+            ItemID.LUNAR_HELM,
+            ItemID.ANCESTRAL_HAT,
+            ItemID.ANCESTRAL_HAT_25518
 
 
 
@@ -558,7 +570,15 @@ public class EffectedEquipment {
             // third age
 
             ItemID.ARMADYL_CHAINSKIRT,
-            ItemID.ARMADYL_CHAINSKIRT_OR
+            ItemID.ARMADYL_CHAINSKIRT_OR,
+
+
+            // Mage
+            ItemID.SPLITBARK_LEGS,
+            ItemID.SWAMPBARK_LEGS,
+            ItemID.BLOODBARK_LEGS,
+            ItemID.LUNAR_LEGS,
+            ItemID.ANCESTRAL_ROBE_BOTTOM
 
 
     );
@@ -599,9 +619,14 @@ public class EffectedEquipment {
             ItemID.GUTHIX_DHIDE_BOOTS,
             ItemID.SARADOMIN_DHIDE_BOOTS,
             ItemID.ZAMORAK_DHIDE_BOOTS,
-            ItemID.PEGASIAN_BOOTS
+            ItemID.PEGASIAN_BOOTS,
 
-
+            // Mage
+            ItemID.SPLITBARK_BOOTS,
+            ItemID.SWAMPBARK_BOOTS,
+            ItemID.BLOODBARK_BOOTS,
+            ItemID.LUNAR_BOOTS,
+            ItemID.ETERNAL_BOOTS
     );
 
     static final Set<Integer> effectedGloves = ImmutableSet.of(
@@ -647,7 +672,14 @@ public class EffectedEquipment {
             ItemID.GUTHIX_BRACERS,
             ItemID.SARADOMIN_BRACERS,
             ItemID.ZAMORAK_BRACERS,
-            ItemID.ZARYTE_VAMBRACES
+            ItemID.ZARYTE_VAMBRACES,
+
+
+            // Mage
+            ItemID.SPLITBARK_GAUNTLETS,
+            ItemID.SWAMPBARK_GAUNTLETS,
+            ItemID.BLOODBARK_GAUNTLETS,
+            ItemID.LUNAR_GLOVES
 
 
     );

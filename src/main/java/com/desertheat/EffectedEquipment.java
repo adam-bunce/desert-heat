@@ -680,6 +680,7 @@ public class EffectedEquipment {
             ItemID.BLOODBARK_BOOTS,
             ItemID.BOOTS_OF_BRIMSTONE,
             ItemID.BRONZE_BOOTS,
+            ItemID.CLUE_HUNTER_BOOTS,
             ItemID.DRAGONSTONE_BOOTS,
             ItemID.DRAGON_BOOTS,
             ItemID.DRAGON_BOOTS_G,

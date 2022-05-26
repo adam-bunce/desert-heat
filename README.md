@@ -32,14 +32,5 @@ then the manual offset in config options should look like this:
 Effect of having "armour" items in each slot on the desert heat timer in ticks, base time is 150 ticks.
 
 ![](READMEimages/effectOfItems.png)
-## Limitations
-The plugin depends on a list of items to calculate how quickly your water will drain, 
-this list is not 100% accurate. Because of this you should take the calculated times with a grain of salt,
-unless confirmed by your own use of the plugin.
 
-## Support
-If you're having to use the Manual Offset 
-config option then some equipment is missing/has been added incorrectly. 
-To fix this *(or to address any other issues)* create a [Github Issue](https://github.com/adam-bunce/desert-heat/issues) 
-with a picture of your `equipment` and the `offset helper chat messages`, or fill out [This Google Form](https://forms.gle/Y5YvxJsys2FuG6vW9) and I will fix it ASAP.
  
